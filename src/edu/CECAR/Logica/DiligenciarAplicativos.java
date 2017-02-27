@@ -26,6 +26,7 @@ public final class DiligenciarAplicativos {
      private static ArrayList<String> ProgramasAdmin = new ArrayList<String>();
       private int posicion;
       private boolean duplicado= false;
+      private boolean eliminar=  false;
     public static DefaultListModel  GenerarAplicativos(){
            String s = null;
 	   String a=null;
@@ -67,7 +68,7 @@ public final class DiligenciarAplicativos {
     public  DefaultListModel ProgramasAdmin( String Programas){
          DefaultListModel modelo = new DefaultListModel();
          for(int i=0; i<ProgramasAdmin.size();i++){
-         if(ProgramasAdmin.get(i).equals(Programas)){
+         if(ProgramasAdmin.get(i).equalsIgnoreCase(Programas)){
             duplicado=true;
          }
         }
@@ -133,9 +134,15 @@ public final class DiligenciarAplicativos {
         for(int i=0 ; i<ProgramasAdmin.size();i++){
             if(ProgramasAdmin.get(i).equals(Programa)){
                 posicion=i;
+                eliminar=true;
             }
         }
-        ProgramasAdmin.remove(posicion);
+        if(eliminar==true){
+        ProgramasAdmin.remove(posicion);}
+        else{
+            JOptionPane.showMessageDialog(null,"Programa no se puede eliminar.. Programa no existe");
+        }
+        
             File archivo = new File("C:\\Users\\JUAN\\Desktop\\listado.txt");
                try (BufferedWriter bw = new BufferedWriter(new FileWriter(archivo))) {
          for (int i = 0; i < ProgramasAdmin.size(); i++) {
