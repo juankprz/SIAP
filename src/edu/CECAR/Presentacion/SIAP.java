@@ -152,7 +152,9 @@ public class SIAP extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem2ActionPerformed
     
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
-        // TODO add your handling code here:
+        String Programa= JOptionPane.showInputDialog(null,"Aplicativo a Eliminar:");
+          DiligenciarAplicativos obj= new  DiligenciarAplicativos();
+           jList2.setModel(obj.Eliminar(Programa));
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     /**

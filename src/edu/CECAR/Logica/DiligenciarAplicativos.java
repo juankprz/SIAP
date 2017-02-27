@@ -24,6 +24,7 @@ public final class DiligenciarAplicativos {
      private File archivo = new File("C:\\Users\\JUAN\\Desktop\\listado.txt");
      private static ArrayList<String>Programasinstalados = new ArrayList<String>();
      private static ArrayList<String> ProgramasAdmin = new ArrayList<String>();
+      private int posicion;
     public static DefaultListModel  GenerarAplicativos(){
            String s = null;
 	   String a=null;
@@ -116,5 +117,27 @@ public final class DiligenciarAplicativos {
            
         return modelo2;
     
+    }
+    public DefaultListModel Eliminar(String Programa){
+       DefaultListModel modelo3 = new DefaultListModel();
+        for(int i=0 ; i<ProgramasAdmin.size();i++){
+            if(ProgramasAdmin.get(i).equals(Programa)){
+                posicion=i;
+            }
+        }
+        ProgramasAdmin.remove(posicion);
+            File archivo = new File("C:\\Users\\JUAN\\Desktop\\listado.txt");
+               try (BufferedWriter bw = new BufferedWriter(new FileWriter(archivo))) {
+         for (int i = 0; i < ProgramasAdmin.size(); i++) {
+        bw.write((String) ( ProgramasAdmin.get(i)));
+        bw.newLine();
+        }
+        } catch (Exception e) {
+          
+        }
+                ProgramasAdmin.forEach((programa) -> {
+              modelo3.addElement(programa);
+         });
+        return modelo3;
     }
 }
