@@ -33,7 +33,7 @@ public class SIAP extends javax.swing.JFrame {
           DiligenciarAplicativos obj = new DiligenciarAplicativos(ruta);
         try {
             
-            obj.muestraContenido(ruta,ProgramasAdmin);
+          jList2.setModel( obj.muestraContenido(ruta,ProgramasAdmin));
             
         } catch (IOException ex) {
             Logger.getLogger(SIAP.class.getName()).log(Level.SEVERE, null, ex);

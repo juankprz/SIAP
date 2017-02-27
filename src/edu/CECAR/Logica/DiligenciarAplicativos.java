@@ -84,14 +84,21 @@ FileReader f;
     }
     
      
-    public  void muestraContenido(String archivo, ArrayList ProgramasAdmin) throws FileNotFoundException, IOException {
+    public  DefaultListModel muestraContenido(String archivo, ArrayList ProgramasAdmin) throws FileNotFoundException, IOException {
         String cadena;
         BufferedReader b = new BufferedReader(f);
+         DefaultListModel modelo2 = new DefaultListModel();
         
         while((cadena = b.readLine())!=null) {
          ProgramasAdmin.add(cadena);
         }
         b.close();
+        ProgramasAdmin.forEach((programa) -> {
+            modelo2.addElement(programa);
+    });
+    return modelo2;
     }
+                             
+    
 
 }
