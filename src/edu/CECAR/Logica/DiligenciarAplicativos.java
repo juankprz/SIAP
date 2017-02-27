@@ -20,26 +20,18 @@ import javax.swing.JOptionPane;
  * @author JUAN
  */
 public final class DiligenciarAplicativos {
-String Ruta;
-    private String ruta;
-    public DiligenciarAplicativos( String ruta) {
-    try {
-        this.f = new FileReader(ruta);
-    } catch (FileNotFoundException ex) {
-        Logger.getLogger(DiligenciarAplicativos.class.getName()).log(Level.SEVERE, null, ex);
-    }
-        this.Ruta=ruta;
-    }
-FileReader f;
-    
+
+     private File archivo = new File("C:\\Users\\JUAN\\Desktop\\listado.txt");
+     private static ArrayList<String>Programasinstalados = new ArrayList<String>();
+     private static ArrayList<String> ProgramasAdmin = new ArrayList<String>();
     public static DefaultListModel  GenerarAplicativos(){
            String s = null;
 	   String a=null;
 	   int size = 0;
            DefaultListModel modelo = new DefaultListModel();
 		try{
-                        ArrayList<String> Programasinstalados = new ArrayList<String>();
-                        String comando = "cmd /c wmic product get name";
+                        
+                    String comando = "cmd /c wmic product get name";
 			Process p = Runtime.getRuntime().exec(comando);
                         BufferedReader stdInput = new BufferedReader(new InputStreamReader( p.getInputStream()));
 				while ((s = stdInput.readLine()) != null) {
@@ -58,9 +50,9 @@ FileReader f;
 					}
 				}
                         
-				for (String programa : Programasinstalados) {
-					modelo.addElement(programa);
-                                }
+                                Programasinstalados.forEach((programa) -> {
+                                    modelo.addElement(programa);
+               });
                      
                     } catch (IOException ex) {
                             Logger.getLogger(DiligenciarAplicativos.class.getName()).log(Level.SEVERE, null, ex);
@@ -68,37 +60,61 @@ FileReader f;
                     }
      return modelo;
     }
- 
-    public  void guardar( ArrayList ProgramasAdmin, File archivo){
-         
-       try (BufferedWriter bw = new BufferedWriter(new FileWriter(archivo))) {
+
+   
+    public  DefaultListModel ProgramasAdmin( String Programas){
+         DefaultListModel modelo = new DefaultListModel();
+          if(Programas !=null ){
+                ProgramasAdmin.add(Programas);
+            }
+          ProgramasAdmin.forEach((programa) -> {
+              modelo.addElement(programa);
+         });
+         if(archivo.exists()){
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(archivo))) {
          for (int i = 0; i < ProgramasAdmin.size(); i++) {
-        bw.write((String) ProgramasAdmin.get(i));
+        bw.write((String) ( ProgramasAdmin.get(i)));
         bw.newLine();
         }
         } catch (Exception e) {
           
-        
-         }
-     
-    }
-    
-     
-    public  DefaultListModel muestraContenido(String archivo, ArrayList ProgramasAdmin) throws FileNotFoundException, IOException {
-        String cadena;
-        BufferedReader b = new BufferedReader(f);
-         DefaultListModel modelo2 = new DefaultListModel();
-        
-        while((cadena = b.readLine())!=null) {
-         ProgramasAdmin.add(cadena);
+        }}else{
+              File archivo = new File("C:\\Users\\JUAN\\Desktop\\listado.txt");
+               try (BufferedWriter bw = new BufferedWriter(new FileWriter(archivo))) {
+         for (int i = 0; i < ProgramasAdmin.size(); i++) {
+        bw.write((String) ( ProgramasAdmin.get(i)));
+        bw.newLine();
         }
-        b.close();
-        ProgramasAdmin.forEach((programa) -> {
-            modelo2.addElement(programa);
-    });
-    return modelo2;
+        } catch (Exception e) {
+          
+        }
+         }
+         
+        return modelo;
     }
-                             
+    public DefaultListModel leer(){
+        DefaultListModel modelo2 = new DefaultListModel();
+       if(archivo.exists()){
+      
+           try {
+         String cadena;
+        FileReader f = new FileReader(archivo);
+        BufferedReader b = new BufferedReader(f);
+               while((cadena = b.readLine())!=null) {
+                  ProgramasAdmin.add(cadena);
+               }
+                ProgramasAdmin.forEach((programa) -> {
+                                    modelo2.addElement(programa);
+                                        });
+           } catch (IOException ex) {
+               Logger.getLogger(DiligenciarAplicativos.class.getName()).log(Level.SEVERE, null, ex);
+           }
+       // b.close();
+       
+    }
+   
+           
+        return modelo2;
     
-
+    }
 }

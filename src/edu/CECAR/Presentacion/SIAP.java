@@ -25,20 +25,13 @@ public class SIAP extends javax.swing.JFrame {
     /**
      * Creates new form SIAP
      */
-    
+  
     public SIAP() {
-        this.ruta = "C:\\Users\\JUAN\\Desktop\\Listado.txt";
+       
         initComponents();
         jList1.setModel(DiligenciarAplicativos.GenerarAplicativos()); 
-          DiligenciarAplicativos obj = new DiligenciarAplicativos(ruta);
-        try {
-            
-          jList2.setModel( obj.muestraContenido(ruta,ProgramasAdmin));
-            
-        } catch (IOException ex) {
-            Logger.getLogger(SIAP.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
+         DiligenciarAplicativos obj= new  DiligenciarAplicativos();
+        jList2.setModel(obj.leer());
     }
 
     /**
@@ -148,23 +141,14 @@ public class SIAP extends javax.swing.JFrame {
         setSize(new java.awt.Dimension(1276, 630));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-  public ArrayList<String> ProgramasAdmin = new ArrayList<String>();
- String ruta;
+   
+  
+
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-        File archivo = new File(ruta);
-            String Programa=JOptionPane.showInputDialog(null,"Ingrese Aplicativo");
-            DefaultListModel modelo1 = new DefaultListModel();
-            if(Programa !=null ){
-                ProgramasAdmin.add(Programa);
-            }
-            for (String programa : ProgramasAdmin) {
-                modelo1.addElement(programa);
-            }
-            DiligenciarAplicativos obj = new DiligenciarAplicativos(ruta);
-            jList2.setModel(modelo1);
-            obj.guardar(ProgramasAdmin,archivo);
-          
+        String Programas= JOptionPane.showInputDialog(null,"Aplicativos");
+        DiligenciarAplicativos obj= new  DiligenciarAplicativos();
+        jList2.setModel(obj.ProgramasAdmin(Programas));
     }//GEN-LAST:event_jMenuItem2ActionPerformed
     
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
