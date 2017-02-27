@@ -25,6 +25,7 @@ public final class DiligenciarAplicativos {
      private static ArrayList<String>Programasinstalados = new ArrayList<String>();
      private static ArrayList<String> ProgramasAdmin = new ArrayList<String>();
       private int posicion;
+      private boolean duplicado= false;
     public static DefaultListModel  GenerarAplicativos(){
            String s = null;
 	   String a=null;
@@ -65,9 +66,18 @@ public final class DiligenciarAplicativos {
    
     public  DefaultListModel ProgramasAdmin( String Programas){
          DefaultListModel modelo = new DefaultListModel();
-          if(Programas !=null ){
+         for(int i=0; i<ProgramasAdmin.size();i++){
+         if(ProgramasAdmin.get(i).equals(Programas)){
+            duplicado=true;
+         }
+        }
+         if(duplicado==true){
+             JOptionPane.showMessageDialog(null,"Aplicacion duplicada");
+         }
+          if(Programas !=null && duplicado==false ){
                 ProgramasAdmin.add(Programas);
             }
+          
           ProgramasAdmin.forEach((programa) -> {
               modelo.addElement(programa);
          });
