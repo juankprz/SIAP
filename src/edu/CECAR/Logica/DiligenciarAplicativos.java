@@ -29,7 +29,7 @@ public final class DiligenciarAplicativos {
      private int posicion;
      private boolean duplicado= false;
      private boolean eliminar=  false;
-     int i; 
+   
      
      
     public static DefaultListModel  GenerarAplicativos(){
@@ -39,7 +39,7 @@ public final class DiligenciarAplicativos {
            DefaultListModel modelo = new DefaultListModel();
 		try{
                         
-                    String comando = "cmd /c wmic product get name";
+                      String comando = "cmd /c wmic product get name";
 			Process p = Runtime.getRuntime().exec(comando);
                         BufferedReader stdInput = new BufferedReader(new InputStreamReader( p.getInputStream()));
 				while ((s = stdInput.readLine()) != null) {
@@ -49,7 +49,7 @@ public final class DiligenciarAplicativos {
 					}
 				}
                                 
-			Programasinstalados.remove(0);
+	        Programasinstalados.remove(0);
 				
 				for(int i=0; i<Programasinstalados.size(); i++){
 					if (Programasinstalados.get(i).trim().isEmpty()){
@@ -60,7 +60,7 @@ public final class DiligenciarAplicativos {
                         
                                 Programasinstalados.forEach((programa) -> {
                                     modelo.addElement(programa);
-               });
+                                });
                      
                     } catch (IOException ex) {
                             Logger.getLogger(DiligenciarAplicativos.class.getName()).log(Level.SEVERE, null, ex);
@@ -71,10 +71,10 @@ public final class DiligenciarAplicativos {
     public  DefaultListModel ProgramasAdmin( String Programas){
          DefaultListModel modelo = new DefaultListModel();
          for(int i=0; i<ProgramasAdmin.size();i++){
-         if(ProgramasAdmin.get(i).equalsIgnoreCase(Programas)){
-            duplicado=true;
-         }
-        }
+             if(ProgramasAdmin.get(i).equalsIgnoreCase(Programas)){
+                   duplicado=true;
+                }
+            }
          if(duplicado==true){
              JOptionPane.showMessageDialog(null,"Aplicacion duplicada");
          }
@@ -84,52 +84,52 @@ public final class DiligenciarAplicativos {
           
           ProgramasAdmin.forEach((programa) -> {
               modelo.addElement(programa);
-         });
+           });
          if(archivo.exists()){
-        try (BufferedWriter bw = new BufferedWriter(new FileWriter(archivo))) {
-         for (int i = 0; i < ProgramasAdmin.size(); i++) {
-        bw.write((String) ( ProgramasAdmin.get(i)));
-        bw.newLine();
-        }
-        } catch (Exception e) {
+           try (BufferedWriter bw = new BufferedWriter(new FileWriter(archivo))) {
+              for (int i = 0; i < ProgramasAdmin.size(); i++) {
+                      bw.write((String) ( ProgramasAdmin.get(i)));
+                      bw.newLine();
+                }
+            } catch (Exception e) {
           
-        }}else{
-              File archivo = new File("C:\\Users\\JUAN\\Desktop\\listado.txt");
-               try (BufferedWriter bw = new BufferedWriter(new FileWriter(archivo))) {
-         for (int i = 0; i < ProgramasAdmin.size(); i++) {
-        bw.write((String) ( ProgramasAdmin.get(i)));
-        bw.newLine();
-        }
-        } catch (Exception e) {
-          
-        }
-         }
+             }
+           }else{
+                   File archivo = new File("C:\\Users\\JUAN\\Desktop\\listado.txt");
+                   try (BufferedWriter bw = new BufferedWriter(new FileWriter(archivo))) {
+                            for (int i = 0; i < ProgramasAdmin.size(); i++) {
+                                   bw.write((String) ( ProgramasAdmin.get(i)));
+                                    bw.newLine();
+                                  }
+                    } catch (Exception e) { 
+                       }
+                 }
          
-        return modelo;
+     return modelo;
     }
     public DefaultListModel leer(){
         DefaultListModel modelo2 = new DefaultListModel();
        if(archivo.exists()){
       
            try {
-         String cadena;
-        FileReader f = new FileReader(archivo);
-        BufferedReader b = new BufferedReader(f);
+               String cadena;
+               FileReader f = new FileReader(archivo);
+               BufferedReader b = new BufferedReader(f);
                while((cadena = b.readLine())!=null) {
-                  ProgramasAdmin.add(cadena);
+                    ProgramasAdmin.add(cadena);
                }
                 ProgramasAdmin.forEach((programa) -> {
-                                    modelo2.addElement(programa);
-                                        });
-           } catch (IOException ex) {
+                    modelo2.addElement(programa);
+                });
+            } catch (IOException ex) {
                Logger.getLogger(DiligenciarAplicativos.class.getName()).log(Level.SEVERE, null, ex);
-           }
-       // b.close();
+               }
+    
        
     }
    
            
-        return modelo2;
+     return modelo2;
     
     }
     public DefaultListModel Eliminar(String Programa){
@@ -147,16 +147,16 @@ public final class DiligenciarAplicativos {
         }
         
             File archivo = new File("C:\\Users\\JUAN\\Desktop\\listado.txt");
-               try (BufferedWriter bw = new BufferedWriter(new FileWriter(archivo))) {
-         for (int i = 0; i < ProgramasAdmin.size(); i++) {
-        bw.write((String) ( ProgramasAdmin.get(i)));
-        bw.newLine();
-        }
-        } catch (Exception e) {
+            try (BufferedWriter bw = new BufferedWriter(new FileWriter(archivo))) {
+               for (int i = 0; i < ProgramasAdmin.size(); i++) {
+                    bw.write((String) ( ProgramasAdmin.get(i)));
+                     bw.newLine();
+                      }
+              } catch (Exception e) {
           
-        }
-                ProgramasAdmin.forEach((programa) -> {
-              modelo3.addElement(programa);
+                 }
+             ProgramasAdmin.forEach((programa) -> {
+                 modelo3.addElement(programa);
          });
         return modelo3;
     }
@@ -176,7 +176,7 @@ public final class DiligenciarAplicativos {
     }
     public DefaultListModel ProgramasNoPermitidos(){
       DefaultListModel modelo5 = new DefaultListModel(); 
-     for (int i = 0; i < ProgramasAdmin.size(); i++) {
+        for (int i = 0; i < ProgramasAdmin.size(); i++) {
             if(!existe(ProgramasAdmin,Programasinstalados.get(i))){
                ProgramasNoPermitidos.add(Programasinstalados.get(i));
             }
@@ -188,10 +188,10 @@ public final class DiligenciarAplicativos {
       
    
       
-        return modelo5;
+      return modelo5;
     }
     public static boolean existe(ArrayList<String> Programasinstalados,String programa ){
-        // se comprueba si exiete 
+    
         boolean existe=false;
         for (int i = 0; i < Programasinstalados.size(); i++) {
             if(programa.equals(Programasinstalados.get(i))){
@@ -202,6 +202,5 @@ public final class DiligenciarAplicativos {
         
         return existe;
     }
-     
     
 }

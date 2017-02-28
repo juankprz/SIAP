@@ -29,11 +29,11 @@ public class SIAP extends javax.swing.JFrame {
     public SIAP() {
        
         initComponents();
-        jList1.setModel(DiligenciarAplicativos.GenerarAplicativos()); 
+         jList1.setModel(DiligenciarAplicativos.GenerarAplicativos()); 
          DiligenciarAplicativos obj= new  DiligenciarAplicativos();
-        jList2.setModel(obj.leer());
+         jList2.setModel(obj.leer());
          jList3.setModel(obj.ProgramasFaltantes());
-          jList4.setModel(obj.ProgramasNoPermitidos());
+         jList4.setModel(obj.ProgramasNoPermitidos());
     }
 
     /**
@@ -156,8 +156,8 @@ public class SIAP extends javax.swing.JFrame {
      
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
         String Programa= JOptionPane.showInputDialog(null,"Aplicativo a Eliminar:");
-          DiligenciarAplicativos obj= new  DiligenciarAplicativos();
-           jList2.setModel(obj.Eliminar(Programa));
+        DiligenciarAplicativos obj= new  DiligenciarAplicativos();
+        jList2.setModel(obj.Eliminar(Programa));
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     /**
