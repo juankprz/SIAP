@@ -24,9 +24,14 @@ public final class DiligenciarAplicativos {
      private File archivo = new File("C:\\Users\\JUAN\\Desktop\\listado.txt");
      private static ArrayList<String>Programasinstalados = new ArrayList<String>();
      private static ArrayList<String> ProgramasAdmin = new ArrayList<String>();
-      private int posicion;
-      private boolean duplicado= false;
-      private boolean eliminar=  false;
+     private static ArrayList<String> ProgramasFaltantes = new ArrayList<String>();
+     private static ArrayList<String> ProgramasNoPermitidos = new ArrayList<String>();
+     private int posicion;
+     private boolean duplicado= false;
+     private boolean eliminar=  false;
+     int i; 
+     
+     
     public static DefaultListModel  GenerarAplicativos(){
            String s = null;
 	   String a=null;
@@ -63,8 +68,6 @@ public final class DiligenciarAplicativos {
                     }
      return modelo;
     }
-
-   
     public  DefaultListModel ProgramasAdmin( String Programas){
          DefaultListModel modelo = new DefaultListModel();
          for(int i=0; i<ProgramasAdmin.size();i++){
@@ -157,4 +160,41 @@ public final class DiligenciarAplicativos {
          });
         return modelo3;
     }
+    public DefaultListModel ProgramasFaltantes(){
+       DefaultListModel modelo4 = new DefaultListModel();
+       for (int i = 0; i < ProgramasAdmin.size(); i++) {
+            if(!existe(Programasinstalados,ProgramasAdmin.get(i))){
+               ProgramasNoPermitidos.add(ProgramasAdmin.get(i));
+            }
+        }
+        ProgramasNoPermitidos.forEach((programa) -> {
+              modelo4.addElement(programa);
+         });
+
+      
+        return modelo4;
+    }
+    public DefaultListModel ProgramasNoPermitidos(){
+      DefaultListModel modelo5 = new DefaultListModel(); 
+     
+
+      
+   
+      
+        return modelo5;
+    }
+    public static boolean existe(ArrayList<String> Programasinstalados,String programa ){
+        // se comprueba si exiete 
+        boolean existe=false;
+        for (int i = 0; i < Programasinstalados.size(); i++) {
+            if(programa.equals(Programasinstalados.get(i))){
+                existe=true;
+                break;
+            }
+        }
+        
+        return existe;
+    }
+     
+    
 }
