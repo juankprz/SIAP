@@ -33,6 +33,7 @@ public class SIAP extends javax.swing.JFrame {
          DiligenciarAplicativos obj= new  DiligenciarAplicativos();
         jList2.setModel(obj.leer());
          jList3.setModel(obj.ProgramasFaltantes());
+          jList4.setModel(obj.ProgramasNoPermitidos());
     }
 
     /**

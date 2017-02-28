@@ -164,10 +164,10 @@ public final class DiligenciarAplicativos {
        DefaultListModel modelo4 = new DefaultListModel();
        for (int i = 0; i < ProgramasAdmin.size(); i++) {
             if(!existe(Programasinstalados,ProgramasAdmin.get(i))){
-               ProgramasNoPermitidos.add(ProgramasAdmin.get(i));
+               ProgramasFaltantes.add(ProgramasAdmin.get(i));
             }
         }
-        ProgramasNoPermitidos.forEach((programa) -> {
+        ProgramasFaltantes.forEach((programa) -> {
               modelo4.addElement(programa);
          });
 
@@ -176,7 +176,14 @@ public final class DiligenciarAplicativos {
     }
     public DefaultListModel ProgramasNoPermitidos(){
       DefaultListModel modelo5 = new DefaultListModel(); 
-     
+     for (int i = 0; i < ProgramasAdmin.size(); i++) {
+            if(!existe(ProgramasAdmin,Programasinstalados.get(i))){
+               ProgramasNoPermitidos.add(Programasinstalados.get(i));
+            }
+        }
+        ProgramasNoPermitidos.forEach((programa) -> {
+              modelo5.addElement(programa);
+         });
 
       
    
